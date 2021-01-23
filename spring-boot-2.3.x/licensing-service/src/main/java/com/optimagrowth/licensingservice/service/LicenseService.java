@@ -19,6 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead.Type;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class LicenseService {
 
@@ -77,49 +83,18 @@ public class LicenseService {
 
     }
 
-    public List<License> getLicenses() {
-        List<License> licenses = new ArrayList<>();
-        licenseRepository.findAll().forEach(l -> licenses.add(l));
-        return licenses;
-    }
-
-    // @CircuitBreaker(name = "organizationService")
+    @CircuitBreaker(name = "organizationService")
     private Organization retrieveOrganizationInfo(String organizationId) {
         return organizationFeignClient.getOrganization(organizationId);
     }
 
-    // This code only for testing >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @SuppressWarnings("unused")
-    private void randomlyRunLong() {
-        Random rand = new Random();
-        int randomNum = rand.nextInt((3 - 1) + 1) + 1;
-        if (randomNum == 3)
-            sleep();
-    }
-
-    private void sleep() {
-        try {
-            Thread.sleep(5000);
-            throw new TimeoutException("");
-        } catch (InterruptedException e) {
-            logger.error(e.getMessage());
-        } catch (TimeoutException e) {
-            logger.error(e.getMessage());
-        }
-    }
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< This code only for testing
-
-    // @CircuitBreaker(name = "licenseService", fallbackMethod =
-    // "buildFallbackLicenseList")
-    // @Bulkhead(name = "bulkheadLicenseService", type = Type.THREADPOOL,
-    // fallbackMethod = "buildFallbackLicenseList")
-    // @Retry(name = "retryLicenseService", fallbackMethod =
-    // "buildFallbackLicenseList")
-    // @RateLimiter(name = "licenseService", fallbackMethod =
-    // "buildFallbackLicenseList")
-    public List<License> getLicenesesByOrganizationId(String organizationId) {
+    @CircuitBreaker(name = "licenseService", fallbackMethod = "buildFallbackLicenseList")
+    @RateLimiter(name = "licenseService", fallbackMethod = "buildFallbackLicenseList")
+    @Retry(name = "retryLicenseService", fallbackMethod = "buildFallbackLicenseList")
+    @Bulkhead(name = "bulkheadLicenseService", type = Type.THREADPOOL, fallbackMethod = "buildFallbackLicenseList")
+    public List<License> getLicenesesByOrganization(String organizationId) throws TimeoutException {
         logger.debug("LicenseService:getLicensesByOrganization: {}", UserContextHolder.getContext().getCorrelationId());
-        // randomlyRunLong();
+        randomlyRunLong();
         return licenseRepository.findByOrganizationId(organizationId);
     }
 
@@ -133,4 +108,22 @@ public class LicenseService {
         fallBackList.add(license);
         return fallBackList;
     }
+
+    // This code only for testing >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    private void randomlyRunLong() throws TimeoutException {
+        Random rand = new Random();
+        int randomNum = rand.nextInt((3 - 1) + 1) + 1;
+        if (randomNum == 3)
+            sleep();
+    }
+
+    private void sleep() throws TimeoutException {
+        try {
+            Thread.sleep(5000);
+            throw new TimeoutException();
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        }
+    }
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< This code only for testing
 }
