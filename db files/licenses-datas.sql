@@ -1,0 +1,1 @@
+INSERT INTO public.licenses (license_id, organization_id, description, product_name, license_type, comment) VALUES ('c241c6f0-29df-433c-9971-25a289737fe5', 'a5985ea1-a45f-4b94-8246-aa2117d75a52', 'Software development product', 'Ostock-lic', 'partial', NULL);

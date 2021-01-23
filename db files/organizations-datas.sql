@@ -1,0 +1,3 @@
+INSERT INTO public.organizations (organization_id, name, contact_name, contact_email, contact_phone) VALUES ('a5985ea1-a45f-4b94-8246-aa2117d75a52', 'Ostock', 'Illary Huaylupo', 'illaryhs@gmail.com', '888888888');
+INSERT INTO public.organizations (organization_id, name, contact_name, contact_email, contact_phone) VALUES ('778310c3-444c-48ec-82cf-f1a5ae07ea4d', 'Ostock', 'admin', 'admin@gmail.com', '999999999');
+INSERT INTO public.organizations (organization_id, name, contact_name, contact_email, contact_phone) VALUES ('d353604f-fd72-43be-bcb7-66dc4616e66d', 'Ostock', 'demo', 'demo@gmail.com', '111111111');
