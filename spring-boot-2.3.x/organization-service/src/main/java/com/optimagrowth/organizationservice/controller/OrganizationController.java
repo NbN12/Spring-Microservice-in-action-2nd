@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @RestController
 @RequestMapping(value = "v1/organization")
-public class OrganzaitionController {
+public class OrganizationController {
 
     @Autowired
     private OrganizationService service;
 
     @GetMapping(value = "/{organizationId}")
-    public ResponseEntity<?> getOrganization(@PathVariable("organizationId") String organizationId) {
+    public ResponseEntity<Organization> getOrganization(@PathVariable("organizationId") String organizationId) {
         return ResponseEntity.ok(service.findById(organizationId));
     }
 
