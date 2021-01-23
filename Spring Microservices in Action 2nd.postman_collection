@@ -1,0 +1,381 @@
+{
+	"info": {
+		"_postman_id": "628e825e-9753-47a7-bd89-7dff40efe711",
+		"name": "Spring Microservices in Action",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Organization service: Create Organization",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Ostock\",\n\t\"contactName\":\"Illary Huaylupo\",\n\t\"contactEmail\":\"illaryhs@gmail.com\",\n\t\"contactPhone\":\"888888888\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/organization/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"organization",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Organization service: Get organization (organization prefix)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Licensing service: Get License",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52/license/c241c6f0-29df-433c-9971-25a289737fe5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52",
+						"license",
+						"c241c6f0-29df-433c-9971-25a289737fe5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Licensing service: Create License",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept-Language",
+						"type": "text",
+						"value": "es"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"organizationId\":\"a5985ea1-a45f-4b94-8246-aa2117d75a52\",\n\t\"description\":\"Software product\",\n\t\"productName\":\"Ostock\",\n\t\"licenseType\":\"complete\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52/license",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52",
+						"license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Licensing service: Update License",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"licenseId\":\"c241c6f0-29df-433c-9971-25a289737fe5\",\n\t\"organizationId\":\"a5985ea1-a45f-4b94-8246-aa2117d75a52\",\n\t\"description\":\"Software development product\",\n\t\"productName\":\"Ostock-lic\",\n\t\"licenseType\":\"partial\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52/license",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52",
+						"license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Licensing service: Delete License",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52/license/c241c6f0-29df-433c-9971-25a289737fe5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52",
+						"license",
+						"c241c6f0-29df-433c-9971-25a289737fe5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eureka Server: Get Organization infomation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8070/eureka/apps/organization-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"eureka",
+						"apps",
+						"organization-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eureka Server: Get Licensing infomation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8070/eureka/apps/licensing-service",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"eureka",
+						"apps",
+						"licensing-service"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway service: Refresh gateway route",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/actuator/gateway/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"actuator",
+						"gateway",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway service: List the routes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/actuator/gateway/routes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"actuator",
+						"gateway",
+						"routes"
+					]
+				},
+				"description": "Chapter 5 url for getting all routes from gateway service"
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway service: Get organization prefix (no authen)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/organization/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"organization",
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway service: Get organization (organization-service prefix, no authen)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/organization-service/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"organization-service",
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gateway service: Get license (licensing-service prefix, no authen)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8072/licensing-service/v1/organization/a5985ea1-a45f-4b94-8246-aa2117d75a52/license/c241c6f0-29df-433c-9971-25a289737fe5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8072",
+					"path": [
+						"licensing-service",
+						"v1",
+						"organization",
+						"a5985ea1-a45f-4b94-8246-aa2117d75a52",
+						"license",
+						"c241c6f0-29df-433c-9971-25a289737fe5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
