@@ -1,0 +1,6 @@
+# settings for connecting db
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ostock_dev
+    username: postgres
+    password: postgres
