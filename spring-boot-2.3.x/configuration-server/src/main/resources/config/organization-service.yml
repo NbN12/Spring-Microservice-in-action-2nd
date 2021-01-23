@@ -42,8 +42,3 @@ eureka:
 
 server:
   port: 8081
-# Spring security
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://localhost:8082/user
