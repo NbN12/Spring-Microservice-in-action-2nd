@@ -18,6 +18,7 @@ spring:
             - Path=/organization/**
           filters:
             - RewritePath=/organization/(?<path>.*), /$\{path}
+            - RemoveRequestHeader=Cookie,Set-Cookie
 
 logging:
   level:
