@@ -42,3 +42,14 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8070/eureka/
+
+# keycloak config
+keycloak:
+  realm: spmia-realm
+  auth-server-url: http://localhost:8090/auth
+  ssl-required: external
+  resource: ostock
+  credentials:
+    secret: b4860b35-6804-4886-906e-a7df97c50318
+  use-resource-role-mappings: true
+  bearer-only: true
