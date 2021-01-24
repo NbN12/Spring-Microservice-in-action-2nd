@@ -1,5 +1,7 @@
 package com.optimagrowth.organizationservice.controller;
 
+import javax.annotation.security.RolesAllowed;
+
 import com.optimagrowth.organizationservice.model.Organization;
 import com.optimagrowth.organizationservice.service.OrganizationService;
 
@@ -23,25 +25,29 @@ public class OrganizationController {
     @Autowired
     private OrganizationService service;
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @GetMapping(value = "/{organizationId}")
     public ResponseEntity<Organization> getOrganization(@PathVariable("organizationId") String organizationId) {
         return ResponseEntity.ok(service.findById(organizationId));
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @PutMapping(value = "/{organizationId}")
     public void updateOrganization(@PathVariable("organizationId") String id, @RequestBody Organization organization) {
         service.update(organization);
     }
 
+    @RolesAllowed({ "ADMIN", "USER" })
     @PostMapping
     public ResponseEntity<Organization> saveOrganization(@RequestBody Organization organization) {
         return ResponseEntity.ok(service.create(organization));
     }
 
+    @RolesAllowed({ "ADMIN" })
     @DeleteMapping(value = "/{organizationId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteOrganization(@PathVariable("id") String id, @RequestBody Organization organization) {
-        service.delete(organization);
+    public void deleteOrganization(@PathVariable("organizationId") String organizationId) {
+        service.delete(organizationId);
     }
 
 }
