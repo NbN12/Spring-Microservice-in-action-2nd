@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: licensing-service
+  # Change profile here
+  profiles:
+    active: dev
+  # Get configuration from config server
+  cloud:
+    config:
+      uri: http://localhost:8071
+logging:
+  level:
+    org.springframework.web: WARN
+    com.spring: DEBUG
+
+# resilience4j config
+resilience4j:
+  bulkhead:
+    instances:
+      bulk-head-license-service:
+        max-concurrent-calls: 20
+        max-wait-duration: 1000s
+  ratelimiter:
+    instances:
+      license-sevice:
+        timeout-duration: 1000ms
+        limit-refresh-period: 5000
+        limit-for-period: 5
+  retry:
+    instances:
+      retry-license-service:
+        max-retry-attempts: 5
+        wait-duration: 10000
+        retry-exceptions:
+          - java.util.concurrent.TimeoutException
+  circuitbreaker:
+    instances:
+      licenseSerivce:
+        register-health-indicator: true
+        ring-buffer-size-in-closed-state: 5
+        ring-buffer-size-in-half-open-state: 3
+        wait-duration-in-open-state: 10s
+        failure-rate-threshold: 50
+        record-exceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.io.IOException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.ResourceAccessException
+      organizationService:
+        register-health-indicator: true
+        ring-buffer-size-in-closed-state: 6
+        ring-buffer-size-in-half-open-state: 4
+        wait-duration-in-open-state: 20s
+        failure-rate-threshold: 60

@@ -1,0 +1,55 @@
+# spring data config
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database: POSTGRESQL
+    show-sql: true
+  datasource:
+    platform: postgres
+    driver-class-name: org.postgresql.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  # disable ribbon
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# health check endpoints config
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: "*"
+
+# eureka config
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}-${random.int[1,999999]}
+  client:
+    # default is true for 2 below
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+
+server:
+  port: 8081
+
+# keycloak config
+keycloak:
+  realm: spmia-realm
+  auth-server-url: http://localhost:8090/auth
+  ssl-required: external
+  resource: ostock
+  credentials:
+    secret: b4860b35-6804-4886-906e-a7df97c50318
+  use-resource-role-mappings: true
+  bearer-only: true
