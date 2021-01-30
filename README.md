@@ -18,7 +18,7 @@ with 2 different spring boot versions.
 ### Prerequisites
 
 * Java 11
-* Postgres
+* Postgres version 9.0 above
 * Docker (optional)
 * Maven (optional if .mvn folder not presented)
 
@@ -38,11 +38,20 @@ For more infomation aboud how to install enviroment see link below
 git clone https://github.com/NbN12/Spring-microservice-in-action.git
 ```
 
-2. Create database and datas from db files folder.
+2. Create db using psql command 
+ ```bash 
+  psql -U yourusername 
+ ```
+3. Enter your password
+4. Then run command 
+```sql 
+CREATE DATABASE ostock; 
+```
+5. Exit psql cli
 
-3. Run _**configuration server**_ first then _**eureka server**_. Others can run unordered.
+6. Run _**configuration server**_ first then _**eureka server**_. Others can run unordered.
 
-4. To run project without package use:
+7. To run project without package them and skip test use:
 
   * bash
 
@@ -56,6 +65,6 @@ git clone https://github.com/NbN12/Spring-microservice-in-action.git
   .\mvnw clean spring-boot:run -DskipTests
   ```
 
-5. Import postman collection.
+8. Import postman collection.
 
-6. Enjoy yourself.
+9. Enjoy yourself.
