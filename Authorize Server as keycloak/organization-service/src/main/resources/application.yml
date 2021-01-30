@@ -1,1 +1,12 @@
 # this file is empty for purpose to config service easier. After configs are done, move it to config server.
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: orgChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092

@@ -13,8 +13,6 @@ import com.optimagrowth.licensingservice.repository.LicenseRepository;
 import com.optimagrowth.licensingservice.service.client.OrganizationFeignClient;
 import com.optimagrowth.licensingservice.utils.UserContextHolder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -24,8 +22,10 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead.Type;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class LicenseService {
 
     @Autowired
@@ -39,8 +39,6 @@ public class LicenseService {
 
     @Autowired
     private ServiceConfig config;
-
-    private static final Logger logger = LoggerFactory.getLogger(LicenseService.class);
 
     public License getLicense(String licenseId, String organizationId) {
         License license = licenseRepository.findByOrganizationIdAndLicenseId(organizationId, licenseId);
@@ -93,7 +91,7 @@ public class LicenseService {
     @Retry(name = "retryLicenseService", fallbackMethod = "buildFallbackLicenseList")
     @Bulkhead(name = "bulkheadLicenseService", type = Type.THREADPOOL, fallbackMethod = "buildFallbackLicenseList")
     public List<License> getLicenesesByOrganization(String organizationId) throws TimeoutException {
-        logger.debug("LicenseService:getLicensesByOrganization: {}", UserContextHolder.getContext().getCorrelationId());
+        log.debug("LicenseService:getLicensesByOrganization: {}", UserContextHolder.getContext().getCorrelationId());
         randomlyRunLong();
         return licenseRepository.findByOrganizationId(organizationId);
     }
@@ -122,7 +120,7 @@ public class LicenseService {
             Thread.sleep(5000);
             throw new TimeoutException();
         } catch (InterruptedException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< This code only for testing

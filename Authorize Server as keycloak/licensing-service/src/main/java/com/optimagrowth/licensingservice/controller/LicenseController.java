@@ -10,8 +10,6 @@ import com.optimagrowth.licensingservice.model.License;
 import com.optimagrowth.licensingservice.service.LicenseService;
 import com.optimagrowth.licensingservice.utils.UserContextHolder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,18 +21,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping(value = "v1/organization/{organizationId}/license")
+@Slf4j
 public class LicenseController {
 
     @Autowired
     private LicenseService licenseService;
 
-    private static final Logger logger = LoggerFactory.getLogger(LicenseController.class);
-
     @RequestMapping(value = { "/", "/all" }, method = RequestMethod.GET)
     public List<License> getLicenses(@PathVariable("organizationId") String organizationId) throws TimeoutException {
-        logger.debug("LicenseServiceController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
+        log.debug("LicenseServiceController Correlation id: {}", UserContextHolder.getContext().getCorrelationId());
         return licenseService.getLicenesesByOrganization(organizationId);
     }
 
