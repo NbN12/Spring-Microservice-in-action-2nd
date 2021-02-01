@@ -14,8 +14,17 @@ spring:
     tomcat:
       test-while-idle: true
       validation-query: SELECT 1
-  # disable ribbon
   cloud:
+    stream:
+      bindings:
+        output:
+          destination: orgChangeTopic
+          content-type: application/json
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
+    # disable ribbon
     loadbalancer:
       ribbon:
         enabled: false
@@ -35,8 +44,8 @@ eureka:
     instance-id: ${spring.application.name}-${random.int[1,999999]}
   client:
     # default is true for 2 below
-    register-with-eureka: true
-    fetch-registry: true
+    # register-with-eureka: true
+    # fetch-registry: true
     service-url:
       defaultZone: http://localhost:8070/eureka/
 

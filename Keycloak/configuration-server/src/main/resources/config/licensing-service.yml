@@ -4,6 +4,9 @@ example:
 
 # spring data config
 spring:
+  redis:
+    host: localhost
+    port: 6379
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -20,6 +23,16 @@ spring:
       validation-query: SELECT 1
   # disable ribbon
   cloud:
+    stream:
+      bindings:
+        input:
+          destination: orgChangeTopic
+          content-type: application/json
+          group: licensing
+      kafka:
+        binder:
+          brokers:
+            - localhost:9092
     loadbalancer:
       ribbon:
         enabled: false
