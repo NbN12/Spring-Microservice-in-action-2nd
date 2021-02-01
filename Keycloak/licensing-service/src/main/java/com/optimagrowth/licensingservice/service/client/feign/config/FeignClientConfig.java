@@ -1,4 +1,4 @@
-package com.optimagrowth.licensingservice.service.client.config;
+package com.optimagrowth.licensingservice.service.client.feign.config;
 
 import java.security.Principal;
 

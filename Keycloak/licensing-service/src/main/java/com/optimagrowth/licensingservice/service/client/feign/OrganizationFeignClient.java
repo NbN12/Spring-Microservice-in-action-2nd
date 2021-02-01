@@ -1,7 +1,7 @@
-package com.optimagrowth.licensingservice.service.client;
+package com.optimagrowth.licensingservice.service.client.feign;
 
 import com.optimagrowth.licensingservice.model.Organization;
-import com.optimagrowth.licensingservice.service.client.config.FeignClientConfig;
+import com.optimagrowth.licensingservice.service.client.feign.config.FeignClientConfig;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

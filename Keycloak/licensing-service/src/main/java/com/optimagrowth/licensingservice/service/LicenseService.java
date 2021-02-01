@@ -10,7 +10,7 @@ import com.optimagrowth.licensingservice.config.ServiceConfig;
 import com.optimagrowth.licensingservice.model.License;
 import com.optimagrowth.licensingservice.model.Organization;
 import com.optimagrowth.licensingservice.repository.LicenseRepository;
-import com.optimagrowth.licensingservice.service.client.OrganizationFeignClient;
+import com.optimagrowth.licensingservice.service.client.OrganizationClient;
 import com.optimagrowth.licensingservice.utils.UserContextHolder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class LicenseService {
     private LicenseRepository licenseRepository;
 
     @Autowired
-    private OrganizationFeignClient organizationFeignClient;
+    private OrganizationClient organizationClient;
 
     @Autowired
     private ServiceConfig config;
@@ -83,7 +83,7 @@ public class LicenseService {
 
     @CircuitBreaker(name = "organizationService")
     private Organization retrieveOrganizationInfo(String organizationId) {
-        return organizationFeignClient.getOrganization(organizationId);
+        return organizationClient.getOrganization(organizationId);
     }
 
     @CircuitBreaker(name = "licenseService", fallbackMethod = "buildFallbackLicenseList")
