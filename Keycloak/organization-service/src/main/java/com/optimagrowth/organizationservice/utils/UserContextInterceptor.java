@@ -11,6 +11,7 @@ import org.springframework.http.client.ClientHttpResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@SuppressWarnings({ "static-access", "unused" })
 public class UserContextInterceptor implements ClientHttpRequestInterceptor {
 
     @Override

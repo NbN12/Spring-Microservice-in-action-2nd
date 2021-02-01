@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @Component
 @Slf4j
+@SuppressWarnings("static-access")
 public class UserContextFilter implements Filter {
 
     @Override
