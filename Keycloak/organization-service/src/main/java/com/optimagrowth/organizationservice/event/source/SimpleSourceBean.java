@@ -1,9 +1,9 @@
 package com.optimagrowth.organizationservice.event.source;
 
+import com.optimagrowth.organizationservice.event.CustomChannels;
 import com.optimagrowth.organizationservice.event.model.OrganizationChangeModel;
 import com.optimagrowth.organizationservice.utils.UserContext;
 
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class SimpleSourceBean {
 
-    private Source source;
+    private CustomChannels customChannels;
 
     public void publishOrganizationChange(String action, String organizationId) {
         log.info("Sending Kafka message {} for Organization Id: {}", action, organizationId);
@@ -24,7 +24,8 @@ public class SimpleSourceBean {
                 .type(OrganizationChangeModel.class.getTypeName()).action(action).organizationId(organizationId)
                 .correlationId(UserContext.getCorrelationId()).build();
 
-        source.output().send(MessageBuilder.withPayload(change).build());
+        // source.output().send(MessageBuilder.withPayload(change).build());
+        customChannels.outboundOrgChanges().send(MessageBuilder.withPayload(change).build());
     }
 
 }
