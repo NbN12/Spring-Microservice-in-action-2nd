@@ -1,10 +1,8 @@
-# Spring microservice in action 2nd (Project repo)
-
----
+# Spring microservice in action 2nd
 
 ## Table of contents
 
-- [Spring microservice in action 2nd (Project repo)](#spring-microservice-in-action-2nd-project-repo)
+- [Spring microservice in action 2nd](#spring-microservice-in-action-2nd)
   - [Table of contents](#table-of-contents)
   - [General info](#general-info)
     - [Prerequisites](#prerequisites)
