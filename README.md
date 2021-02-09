@@ -30,24 +30,24 @@ with 2 different spring boot versions.
 ### Installation
 
 For more infomation aboud how to install enviroment see link below
-1. Local
-   * **How to install JDK**
+1. Locally(How to install)
+   * **JDK**
      * [Windows](https://www.youtube.com/watch?v=IJ-PJbvJBGs)
      * [Ubuntu](https://stackoverflow.com/questions/52504825/how-to-install-jdk-11-under-ubuntu)
-   * **How to install postgres**
+   * **Postgres**
      * [Windows](https://www.youtube.com/watch?v=e1MwsT5FJRQ)
      * [Ubuntu](https://www.postgresql.org/download/linux/ubuntu/)
-   * **How to install docker**
+   * **Docker**
      * [Windows](https://www.youtube.com/watch?v=_9AWYlt86B8) 
      * [Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
-   * **How to install Kafka**
+   * **Kafka**
      * [Windows](https://www.goavega.com/install-apache-kafka-on-windows/)
      * [Ubuntu](https://hevodata.com/blog/how-to-install-kafka-on-ubuntu/)
-   * **How to install redis**
+   * **Redis**
      * [Windows](https://stackoverflow.com/questions/6476945/how-do-i-run-redis-on-windows)
      * [Ubuntu](https://redis.io/topics/quickstart)
-2. Docker
-   * **How to install redis**
+2. Docker(How to install)
+   * **Redis**
       ```bash
       docker run --name redis -p 6379:6379 -d redis
       ```
@@ -94,8 +94,7 @@ For more infomation aboud how to install enviroment see link below
 2. Docker (comming soon)
 
 ## Tips
-When you are tesing postman for non-authentication route simply change these line
-* In SecurityConfig.java
+* When you are tesing postman for non-authentication route simply change these line in SecurityConfig.java
    ```java
    http.csrf().disable().authorizeRequests().anyRequest().authenticated();
    ```
