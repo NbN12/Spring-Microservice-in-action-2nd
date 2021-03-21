@@ -5,7 +5,7 @@ spring:
   cloud:
     config:
       uri:
-        - http://localhost:8071
+        - http://configserver:8071
     loadbalancer:
       ribbon:
         enabled: false
