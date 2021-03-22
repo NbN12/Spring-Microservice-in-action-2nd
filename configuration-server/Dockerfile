@@ -13,4 +13,5 @@ COPY --from=builder /snapshot-dependencies/ ./
 COPY --from=builder /spring-boot-loader/ ./
 COPY --from=builder /application/ ./
 
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+ADD start.sh /start.sh
+CMD [ "/start.sh" ]

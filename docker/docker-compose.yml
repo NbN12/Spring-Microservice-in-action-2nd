@@ -1,6 +1,8 @@
 version: "3.7"
 services:
   configserver:
+    build: ../configuration-server
+    container_name: config-server-latest
     image: configuration-server:latest
     ports:
       - "8071:8071"
@@ -9,12 +11,11 @@ services:
         aliases:
           - "configserver"
   eurekaserver:
+    build: ../eureka-server
     image: eureka-server:latest
+    container_name: eureka-server-latest
     ports:
       - "8070:8070"
-    restart: on-failure
-    depends_on:
-      - "configserver"
     networks:
       backend:
         aliases:
